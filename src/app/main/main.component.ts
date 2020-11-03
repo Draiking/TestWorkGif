@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { GifService } from '../service/gif.service';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,9 @@ export class MainComponent implements OnInit {
 
   textInput = '';
 
-  constructor() { }
+  constructor(
+    private gifService: GifService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +25,11 @@ export class MainComponent implements OnInit {
   }
 
   search() {
-    const tag = this.textInput
+    const tag = this.textInput;
+    this.gifService.getGif(tag)
+    .then((res) => {
+      console.log(res);
+    })
   }
 
 }
