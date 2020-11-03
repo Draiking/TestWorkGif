@@ -4,3 +4,8 @@
     <button></button>
     <button></button>
 </div>
+
+
+<ng-container *ngFor="let gif of gifs">
+    <div class="gif" [style.background-image]="'url(' + gif.image_url + ')'"></div>
+</ng-container>
