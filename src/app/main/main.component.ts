@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GifInterface } from '../interface/gif.interface';
 import { GifService } from '../service/gif.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-main',
@@ -14,6 +15,8 @@ export class MainComponent implements OnInit {
   textInput = '';
 
   gifs: Array<GifInterface> = [];
+  inputLenght;
+  tags = [];
 
   constructor(
     private gifService: GifService
@@ -24,16 +27,27 @@ export class MainComponent implements OnInit {
 
   tegInput(event: string) {
     this.textInput = event;
-    
+    this.inputLenght = event.length;
   }
 
   search() {
     const tag = this.textInput;
-    this.gifService.getGif(tag)
-    .then((res: any) => {
-      console.log(res);
-      this.gifs.push(res.data);
-    })
+    if (this.inputLenght > 0) {
+      this.gifService.getGif(tag)
+      .then((res: any) => {
+        console.log(res);
+        res.data.myType = tag;
+        this.tags.push(tag);
+        this.tags = _.uniq(this.tags);
+        this.gifs.push(res.data);
+      })
+    } else {
+      alert('Ввудите тэг для поиска');
+    }
+  }
+
+  group() {
+    console.log(this.tags)
   }
 
 }

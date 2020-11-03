@@ -1,3 +1,4 @@
 export interface GifInterface {
-    image_url?: string
+    image_url?: string,
+    myType?: string,
 }
