@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  @ViewChild('input', {static: true}) input: ElementRef;
+
+  textInput = '';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  tegInput(event: string) {
+    this.textInput = event;
+    
+  }
+
+  search() {
+    const tag = this.textInput
   }
 
 }

@@ -1,1 +1,6 @@
-<p>main works!</p>
+<div class="serch">
+    <input #input (ngModelChange)="tegInput($event)" type="text" [(ngModel)]="textInput">
+    <button mat-raised-button color="primary" (click)="search()">Загрузить</button>
+    <button></button>
+    <button></button>
+</div>
