@@ -14,9 +14,13 @@ export class MainComponent implements OnInit {
 
   textInput = '';
 
+  groupBoolean: boolean = true;
+
   gifs: Array<GifInterface> = [];
-  inputLenght;
+  inputLenght: any;
   tags = [];
+  gifsGroupArr = [];
+  gifsGroup = {};
 
   constructor(
     private gifService: GifService
@@ -47,7 +51,21 @@ export class MainComponent implements OnInit {
   }
 
   group() {
-    console.log(this.tags)
+    this.gifsGroupArr = [];
+    this.gifsGroup = {}
+    for (let item of this.gifs) {
+      if(!this.gifsGroup[item.myType]) {
+        this.gifsGroup[item.myType] = [];
+      }
+      this.gifsGroup[item.myType].push(item)
+    }
+    _.each(this.gifsGroup, (arr) => {
+      this.gifsGroupArr.push(arr);
+    })
+  }
+
+  unGroup() {
+    this.gifsGroupArr = [];
   }
 
 }
