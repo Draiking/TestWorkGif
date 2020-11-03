@@ -10,9 +10,10 @@ import * as _ from 'lodash';
 })
 export class MainComponent implements OnInit {
 
-  @ViewChild('input', {static: true}) input: ElementRef;
-
   textInput = '';
+
+  buttonValue: string = 'Загрузить';
+  loadButton: boolean = true;
 
   groupBoolean: boolean = true;
 
@@ -37,24 +38,44 @@ export class MainComponent implements OnInit {
   search() {
     const tag = this.textInput;
     if (this.inputLenght > 0) {
+      this.loadButton = false;
+      this.buttonValue = 'Загрузка...';
       this.gifService.getGif(tag)
-      .then((res: any) => {
-        console.log(res);
-        res.data.myType = tag;
-        this.tags.push(tag);
-        this.tags = _.uniq(this.tags);
-        this.gifs.push(res.data);
-      })
+        .then((res: any) => {
+          if (!res.data.image_url) {
+            alert('По тэгу ничего не найдено');
+          } else {
+            res.data.myType = tag;
+            this.tags.push(tag);
+            this.tags = _.uniq(this.tags);
+            this.gifs.push(res.data);
+          }
+        })
+      setTimeout(() => {
+        this.buttonValue = 'Загрузить';
+        this.loadButton = true;
+      }, 500)
     } else {
       alert('Ввудите тэг для поиска');
     }
+  }
+
+  editTag(typeTag) {
+    this.textInput = typeTag;
+  }
+  
+  clear() {
+    this.textInput = '';
+    this.gifs = [];
+    this.gifsGroupArr = [];
+    this.groupBoolean = true;
   }
 
   group() {
     this.gifsGroupArr = [];
     this.gifsGroup = {}
     for (let item of this.gifs) {
-      if(!this.gifsGroup[item.myType]) {
+      if (!this.gifsGroup[item.myType]) {
         this.gifsGroup[item.myType] = [];
       }
       this.gifsGroup[item.myType].push(item)

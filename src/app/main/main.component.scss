@@ -1,21 +1,50 @@
 @import "../../styles.scss";
 
+input {
+  margin: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
 .search {
-    padding: 20px 0;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .wrapper-gif {
-    flex-wrap: wrap;
-    height: 250px;
-    width: 100%;
+  flex-wrap: wrap;
+  height: 250px;
+  width: 100%;
+}
+
+
+
+.wrapper-group {
+  border: 1px solid gray;
+  padding: 10px 5px 30px 5px;
+  margin-bottom: 5px;
 }
 
 .gif {
-    display: inline-block;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    max-width: 30%;
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  max-width: 30%;
+  margin: 10px;
+}
+
+.border {
+    border: 1px solid gray;
+    box-sizing: border-box;
+    padding: 10px;
+    .gif {
+        max-width: 100%;
+        margin: 0!important;
+    }
 }
